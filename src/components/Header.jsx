@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { HiEllipsisVertical, HiMiniBars3 } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { GifState } from "../context/gif-context";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const [showCategories, setShowCategories] = useState(false);
@@ -27,7 +28,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center ">
         {/* image */}
         <div>
           <Link to="/">
@@ -97,6 +98,7 @@ const Header = () => {
       )}
 
       {/* searchbar */}
+      <SearchBar />
     </div>
   );
 };

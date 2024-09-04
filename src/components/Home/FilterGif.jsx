@@ -25,14 +25,14 @@ const FilterGif = ({ showTrendingLabel = false }) => {
   const { filter, setFilter } = GifState();
 
   return (
-    <div className="flex justify-between flex-col sm:flex-row">
+    <div className="flex justify-between flex-col sm:flex-row pb-4">
       {/* trending label */}
       {showTrendingLabel && (
         <div className="flex items-center gap-2">
           <span className="text-white">
             <IoMdTrendingUp />
           </span>
-          <span className="text-gray-500">Trending</span>
+          <span className="text-gray-500 font-semibold">Trending</span>
         </div>
       )}
 
@@ -43,7 +43,7 @@ const FilterGif = ({ showTrendingLabel = false }) => {
             <span
               key={f.title}
               onClick={() => setFilter(f.value)}
-              className={`text-white w-1/3 rounded-full text-center cursor-pointer ${
+              className={`text-white w-1/3 rounded-full text-center cursor-pointer font-semibold ${
                 filter === f.value ? f.background : ""
               }`}
             >
