@@ -7,13 +7,13 @@ import Gif from "../components/Home/Gif";
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
 
-  const { gf, filter } = GifState();
+  const { giphyFetch, filter } = GifState();
 
   const { query } = useParams();
   console.log(query);
 
   const fetchSearchResults = async () => {
-    const { data } = await gf.search(query, {
+    const { data } = await giphyFetch.search(query, {
       sort: "relevance",
       type: filter,
     });

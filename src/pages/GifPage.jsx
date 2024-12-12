@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GifState } from "../context/gif-context";
 import Gif from "../components/Home/Gif";
-import { HiMiniChevronDown, HiMiniChevronUp } from "react-icons/hi2";
+import {
+  HiMiniChevronDown,
+  HiMiniChevronUp,
+  HiMiniHeart,
+} from "react-icons/hi2";
 import { FaPaperPlane } from "react-icons/fa";
+import { CiHeart } from "react-icons/ci";
+import { ImEmbed } from "react-icons/im";
 
 const GifPage = () => {
   const [gif, setGif] = useState([]);
@@ -11,12 +17,15 @@ const GifPage = () => {
   const [relatedGif, setRelatedGif] = useState([]);
   const [readMore, setReadMore] = useState(false);
 
-  const { gf } = GifState();
+  const { giphyFetch, addToFavorites, favorites } = GifState();
 
   const fetchGif = async () => {
     const gifId = slug.split("-");
-    const { data } = await gf.gif(gifId[gifId.length - 1]);
-    const { data: related } = await gf.related(gifId[gifId.length - 1]);
+    const { data } = await giphyFetch.gif(gifId[gifId.length - 1]);
+    const { data: related } = await giphyFetch.related(
+      gifId[gifId.length - 1],
+      { limit: 10 }
+    );
 
     setGif(data);
     setRelatedGif(related);
@@ -93,12 +102,38 @@ const GifPage = () => {
                 <div className="text-gray-400">@{gif?.user?.username}</div>
               </div>
               <button className="ml-auto">
+                <CiHeart size={25} />
+              </button>
+              <button className="ml-auto">
                 <FaPaperPlane size={25} />
               </button>
             </div>
           </div>
 
           {/* fav/share/embed */}
+          <div className="hidden mt-16 sm:flex flex-col gap-6">
+            {/* favorite */}
+            <div
+              className="flex gap-3 cursor-pointer"
+              onClick={() => addToFavorites(gif?.id)}
+            >
+              <HiMiniHeart
+                size={25}
+                className={`${
+                  favorites.includes(gif?.id) ? "text-red-600" : ""
+                }`}
+              />
+              <p>Favorite</p>
+            </div>
+            <div className="flex gap-3">
+              <FaPaperPlane size={20} />
+              <p>Share</p>
+            </div>
+            <div className="flex gap-3">
+              <ImEmbed size={25} />
+              <p>Embed</p>
+            </div>
+          </div>
         </div>
 
         {/* related gifs */}

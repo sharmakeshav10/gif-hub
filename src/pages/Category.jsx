@@ -6,12 +6,12 @@ import Gif from "../components/Home/Gif";
 const Category = () => {
   const [results, setResults] = useState([]);
 
-  const { gf } = GifState();
+  const { giphyFetch } = GifState();
 
   const { category } = useParams();
 
   const fetchResults = async () => {
-    const { data } = await gf.gifs(category, category);
+    const { data } = await giphyFetch.gifs(category, category);
 
     console.log(data);
 

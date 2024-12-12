@@ -1,5 +1,5 @@
 import { GiphyFetch } from "@giphy/js-fetch-api";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const GifContext = createContext();
 
@@ -7,10 +7,39 @@ const GifProvider = ({ children }) => {
   //for all the gifs
   const [gifs, setGifs] = useState([]);
   const [filter, setFilter] = useState("gifs");
+  const [favorites, setFavorites] = useState([]);
 
-  const gf = new GiphyFetch(import.meta.env.VITE_GIPHY_API_KEY);
+  const addToFavorites = (id) => {
+    if (favorites.includes(id)) {
+      const updatedFav = favorites.filter((item) => item !== id);
+      setFavorites(updatedFav);
+      localStorage.setItem("favGIFs", JSON.stringify(updatedFav));
+    } else {
+      const updatedFav = [...favorites];
+      updatedFav.push(id);
+      setFavorites(updatedFav);
+      localStorage.setItem("favGIFs", JSON.stringify(updatedFav));
+    }
+  };
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favGIFs"));
+    setFavorites(favorites);
+  }, []);
+
+  const giphyFetch = new GiphyFetch(import.meta.env.VITE_GIPHY_API_KEY);
   return (
-    <GifContext.Provider value={{ gf, gifs, setGifs, filter, setFilter }}>
+    <GifContext.Provider
+      value={{
+        giphyFetch,
+        gifs,
+        setGifs,
+        filter,
+        setFilter,
+        favorites,
+        addToFavorites,
+      }}
+    >
       {children}
     </GifContext.Provider>
   );

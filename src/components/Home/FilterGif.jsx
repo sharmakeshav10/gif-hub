@@ -30,20 +30,20 @@ const FilterGif = ({ showTrendingLabel = false }) => {
       {showTrendingLabel && (
         <div className="flex items-center gap-2">
           <span className="text-white">
-            <IoMdTrendingUp />
+            <IoMdTrendingUp size={20} color="blue" />
           </span>
-          <span className="text-gray-500 font-semibold">Trending</span>
+          <span className="text-white font-bold text-xl">Trending Now</span>
         </div>
       )}
 
       {/* filter buttons */}
-      <div className="bg-gray-800 rounded-full min-w-80 flex py-2">
+      <div className="bg-gradient-to-b from-gray-700 to-gray-800 rounded-full min-w-80 flex">
         {filters.map((f) => {
           return (
             <span
               key={f.title}
               onClick={() => setFilter(f.value)}
-              className={`text-white w-1/3 rounded-full text-center cursor-pointer font-semibold ${
+              className={`text-white w-1/3 rounded-full text-center cursor-pointer font-semibold py-2 ${
                 filter === f.value ? f.background : ""
               }`}
             >

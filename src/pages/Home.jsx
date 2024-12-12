@@ -4,10 +4,12 @@ import Gif from "../components/Home/Gif";
 import FilterGif from "../components/Home/FilterGif";
 
 const Home = () => {
-  const { gf, gifs, setGifs, filter } = GifState();
+  const { giphyFetch, gifs, setGifs, filter } = GifState();
+
+  console.log("GIFSSS", gifs);
 
   const fetchTrending = async () => {
-    const { data } = await gf.trending({
+    const { data } = await giphyFetch.trending({
       type: filter,
       rating: "g",
     });
@@ -25,7 +27,7 @@ const Home = () => {
       <FilterGif showTrendingLabel={true} />
 
       {/* gifs on home page */}
-      <div className="columns-2 sm:columns-3 md:columns-4">
+      <div className="columns-2 sm:columns-3 md:columns-4 gap-2">
         {gifs.map((gif) => {
           return <Gif key={gif.id} gif={gif} />;
         })}

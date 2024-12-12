@@ -8,11 +8,11 @@ const Header = () => {
   const [showCategories, setShowCategories] = useState(false);
   const [categories, setCategories] = useState([]);
 
-  const { gf } = GifState();
+  const { giphyFetch, favorites } = GifState();
 
   const fetchCategories = async () => {
     try {
-      const { data } = await gf.categories();
+      const { data } = await giphyFetch.categories();
 
       setCategories(data);
 
@@ -29,16 +29,17 @@ const Header = () => {
   return (
     <div>
       <div className="flex justify-between items-center ">
-        {/* image */}
+        {/* logo */}
         <div>
           <Link to="/">
-            <img src="src\assets\giphy_logo.png" className="w-36" />
+            {/* <img src="src\assets\giphy_logo.png" className="w-36" /> */}
+            <h1 className="text-white text-5xl font-bold font-sans">GIPHY.</h1>
           </Link>
         </div>
 
         {/* categories */}
-        <div className="flex items-center gap-1">
-          {categories.slice(0, 5).map((category) => {
+        <div className="relative flex items-center gap-1">
+          {categories?.slice(0, 5).map((category) => {
             return (
               <Link
                 key={category.name}
@@ -60,11 +61,15 @@ const Header = () => {
           </button>
 
           {/* favorites button */}
-          <div>
-            <button className="bg-gray-500 px-6 py-1 pt-1 text-white rounded">
-              Favorite GIFs
-            </button>
-          </div>
+          {favorites.length > 0 && (
+            <div>
+              <Link to="/favorites">
+                <button className="bg-gray-500 px-6 py-1 pt-1 text-white rounded">
+                  Favorite GIFs
+                </button>
+              </Link>
+            </div>
+          )}
 
           {/* breadcrumb icon */}
           <div>
