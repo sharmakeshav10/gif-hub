@@ -10,7 +10,7 @@ const GifProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
   const addToFavorites = (id) => {
-    if (favorites.includes(id)) {
+    if (favorites?.includes(id)) {
       const updatedFav = favorites.filter((item) => item !== id);
       setFavorites(updatedFav);
       localStorage.setItem("favGIFs", JSON.stringify(updatedFav));

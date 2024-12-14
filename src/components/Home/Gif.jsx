@@ -37,7 +37,7 @@ const Gif = ({ gif, hover = true }) => {
                   className="cursor-pointer"
                   onClick={(e) => {
                     e.preventDefault();
-                    favorites.includes(gif?.id)
+                    favorites?.includes(gif?.id)
                       ? removeFromFavorites(gif?.id)
                       : addToFavorites(gif?.id);
                   }}
@@ -45,7 +45,7 @@ const Gif = ({ gif, hover = true }) => {
                   <HiMiniHeart
                     size={25}
                     className={`${
-                      favorites.includes(gif?.id)
+                      favorites?.includes(gif?.id)
                         ? "text-red-600"
                         : "text-white"
                     }`}

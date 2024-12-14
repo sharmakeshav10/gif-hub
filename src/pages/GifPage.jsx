@@ -107,7 +107,7 @@ const GifPage = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => {
-                    favorites.includes(gif?.id)
+                    favorites?.includes(gif?.id)
                       ? removeFromFavorites(gif?.id)
                       : addToFavorites(gif?.id);
                   }}
@@ -115,7 +115,7 @@ const GifPage = () => {
                   <CiHeart
                     size={25}
                     className={`${
-                      favorites.includes(gif?.id) ? "text-red-600" : ""
+                      favorites?.includes(gif?.id) ? "text-red-600" : ""
                     }`}
                   />
                 </button>
@@ -139,7 +139,7 @@ const GifPage = () => {
             <div
               className="flex items-center gap-3 cursor-pointer"
               onClick={() => {
-                favorites.includes(gif?.id)
+                favorites?.includes(gif?.id)
                   ? removeFromFavorites(gif?.id)
                   : addToFavorites(gif?.id);
               }}
@@ -147,7 +147,7 @@ const GifPage = () => {
               <HiMiniHeart
                 size={25}
                 className={`${
-                  favorites.includes(gif?.id) ? "text-red-600" : ""
+                  favorites?.includes(gif?.id) ? "text-red-600" : ""
                 }`}
               />
               <p>Favorite</p>
