@@ -22,6 +22,12 @@ const GifProvider = ({ children }) => {
     }
   };
 
+  const removeFromFavorites = (id) => {
+    const updatedFav = favorites.filter((item) => item !== id);
+    setFavorites(updatedFav);
+    localStorage.setItem("favGIFs", JSON.stringify(updatedFav));
+  };
+
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favGIFs"));
     setFavorites(favorites);
@@ -38,6 +44,7 @@ const GifProvider = ({ children }) => {
         setFilter,
         favorites,
         addToFavorites,
+        removeFromFavorites,
       }}
     >
       {children}

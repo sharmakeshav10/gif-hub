@@ -62,13 +62,16 @@ const Header = () => {
 
           {/* favorites button */}
           {favorites.length > 0 && (
-            <div>
+            <>
               <Link to="/favorites">
-                <button className="bg-gray-500 px-6 py-1 pt-1 text-white rounded">
+                {/* <button className="bg-gray-500 px-6 py-1 pt-1 text-white rounded">
                   Favorite GIFs
+                </button> */}
+                <button className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                  Favorite GIFS
                 </button>
               </Link>
-            </div>
+            </>
           )}
 
           {/* breadcrumb icon */}

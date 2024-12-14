@@ -17,7 +17,8 @@ const GifPage = () => {
   const [relatedGif, setRelatedGif] = useState([]);
   const [readMore, setReadMore] = useState(false);
 
-  const { giphyFetch, addToFavorites, favorites } = GifState();
+  const { giphyFetch, addToFavorites, favorites, removeFromFavorites } =
+    GifState();
 
   const fetchGif = async () => {
     const gifId = slug.split("-");
@@ -115,7 +116,12 @@ const GifPage = () => {
             {/* favorite */}
             <div
               className="flex gap-3 cursor-pointer"
-              onClick={() => addToFavorites(gif?.id)}
+              onClick={() => {
+                e.preventDefault();
+                favorites.includes(gif?.id)
+                  ? removeFromFavorites(gif?.id)
+                  : addToFavorites(gif?.id);
+              }}
             >
               <HiMiniHeart
                 size={25}
