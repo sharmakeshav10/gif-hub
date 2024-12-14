@@ -6,8 +6,6 @@ import FilterGif from "../components/Home/FilterGif";
 const Home = () => {
   const { giphyFetch, gifs, setGifs, filter } = GifState();
 
-  console.log("GIFSSS", gifs);
-
   const fetchTrending = async () => {
     const { data } = await giphyFetch.trending({
       type: filter,

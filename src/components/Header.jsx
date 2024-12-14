@@ -15,10 +15,8 @@ const Header = () => {
       const { data } = await giphyFetch.categories();
 
       setCategories(data);
-
-      console.log(`categories`, data);
     } catch (error) {
-      console.error(`categories`, error);
+      throw new Error(error);
     }
   };
 
@@ -61,7 +59,7 @@ const Header = () => {
           </button>
 
           {/* favorites button */}
-          {favorites.length > 0 && (
+          {favorites?.length > 0 && (
             <>
               <Link to="/favorites">
                 {/* <button className="bg-gray-500 px-6 py-1 pt-1 text-white rounded">
@@ -94,10 +92,11 @@ const Header = () => {
             {categories.map((category) => {
               return (
                 <Link
-                  to={`/${category.name_encoded}`}
+                  key={category?.name}
+                  to={`/${category?.name_encoded}`}
                   className="p-2 hover:opacity-80 font-bold"
                 >
-                  {category.name}
+                  {category?.name}
                 </Link>
               );
             })}

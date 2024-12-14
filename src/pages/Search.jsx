@@ -10,7 +10,6 @@ const Search = () => {
   const { giphyFetch, filter } = GifState();
 
   const { query } = useParams();
-  console.log(query);
 
   const fetchSearchResults = async () => {
     const { data } = await giphyFetch.search(query, {
@@ -30,13 +29,13 @@ const Search = () => {
       <div className="flex items-end gap-4 mb-4">
         <h1 className="font-extrabold text-white text-4xl">{query}</h1>
         <span className="text-gray-400 font-semibold text-md">
-          {searchResults.length} {filter}
+          {searchResults?.length} {filter}
         </span>
       </div>
 
       <FilterGif />
 
-      {searchResults.length > 0 ? (
+      {searchResults?.length > 0 ? (
         <div className="columns-2 sm:columns-3 md:columns-4">
           {searchResults.map((res) => {
             return <Gif key={res.id} gif={res} />;

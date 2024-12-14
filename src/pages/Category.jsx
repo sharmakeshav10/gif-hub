@@ -13,8 +13,6 @@ const Category = () => {
   const fetchResults = async () => {
     const { data } = await giphyFetch.gifs(category, category);
 
-    console.log(data);
-
     setResults(data);
   };
 
@@ -26,7 +24,7 @@ const Category = () => {
     <div className="flex flex-col sm:flex-row gap-10 pt-4">
       {/* left side */}
       <div className="w-full sm:w-72">
-        {results.length > 0 && <Gif gif={results[0]} />}
+        {results?.length > 0 && <Gif gif={results[0]} />}
         <span className="text-gray-400 text-sm">
           Don't tell it me, GIF it to me
         </span>
@@ -41,7 +39,7 @@ const Category = () => {
           @{category}
         </h2>
 
-        {results.length > 0 && (
+        {results?.length > 0 && (
           <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
             {results.slice(1).map((gif) => {
               return <Gif gif={gif} />;

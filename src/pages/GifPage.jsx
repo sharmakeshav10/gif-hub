@@ -24,9 +24,9 @@ const GifPage = () => {
 
   const fetchGif = async () => {
     const gifId = slug.split("-");
-    const { data } = await giphyFetch.gif(gifId[gifId.length - 1]);
+    const { data } = await giphyFetch.gif(gifId[gifId?.length - 1]);
     const { data: related } = await giphyFetch.related(
-      gifId[gifId.length - 1],
+      gifId[gifId?.length - 1],
       { limit: 10 }
     );
 

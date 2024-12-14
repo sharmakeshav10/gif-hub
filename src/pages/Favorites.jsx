@@ -8,7 +8,7 @@ const Favorites = () => {
   const { giphyFetch, favorites } = GifState();
 
   const fetchFavoriteGIFs = async () => {
-    if (favorites.length > 0) {
+    if (favorites?.length > 0) {
       const { data } = await giphyFetch.gifs(favorites);
       setFavGIFs(data);
     } else {
@@ -24,7 +24,7 @@ const Favorites = () => {
     <div>
       <h3 className="text-gray-400">My Favorites</h3>
       <div className="columns-2 sm:columns-3 md:columns-4 gap-2 mt-2">
-        {favGIFs.length > 0 ? (
+        {favGIFs?.length > 0 ? (
           favGIFs.map((gif) => {
             return <Gif key={gif.id} gif={gif} />;
           })
