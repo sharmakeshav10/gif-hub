@@ -1,8 +1,10 @@
 import React from "react";
-import { FaPaperPlane } from "react-icons/fa";
+
 import { HiMiniHeart } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { GifState } from "../../context/gif-context";
+import toast from "react-hot-toast";
+import { IoIosLink } from "react-icons/io";
 
 const Gif = ({ gif, hover = true }) => {
   const { favorites, addToFavorites, removeFromFavorites } = GifState();
@@ -29,7 +31,7 @@ const Gif = ({ gif, hover = true }) => {
                   {gif?.user?.display_name}
                 </span>
               </div>
-              <div className="absolute top-0 flex gap-3 mt-2 ml-2 rounded opacity-0 group-hover:opacity-100 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% p-1">
+              <div className="absolute top-0 flex items-center gap-3 mt-2 ml-2 rounded opacity-0 group-hover:opacity-100 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% p-1">
                 {/* favorite */}
                 <button
                   className="cursor-pointer"
@@ -49,8 +51,15 @@ const Gif = ({ gif, hover = true }) => {
                     }`}
                   />
                 </button>
-                <div className="text-white">
-                  <FaPaperPlane size={20} />
+                <div
+                  className="text-white"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigator.clipboard.writeText(gif?.images?.original?.url);
+                    toast.success("Copied to Clipboard");
+                  }}
+                >
+                  <IoIosLink size={20} />
                 </div>
               </div>
             </>

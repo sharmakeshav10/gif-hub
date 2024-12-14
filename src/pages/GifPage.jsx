@@ -7,13 +7,13 @@ import {
   HiMiniChevronUp,
   HiMiniHeart,
 } from "react-icons/hi2";
-import { FaPaperPlane } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { ImEmbed } from "react-icons/im";
+import { IoIosLink } from "react-icons/io";
 
 const GifPage = () => {
   const [gif, setGif] = useState([]);
-  const { type, slug } = useParams();
+  const { slug } = useParams();
   const [relatedGif, setRelatedGif] = useState([]);
   const [readMore, setReadMore] = useState(false);
 
@@ -102,12 +102,21 @@ const GifPage = () => {
                 </div>
                 <div className="text-gray-400">@{gif?.user?.username}</div>
               </div>
-              <button className="ml-auto">
-                <CiHeart size={25} />
-              </button>
-              <button className="ml-auto">
-                <FaPaperPlane size={25} />
-              </button>
+              <div className="flex items-center gap-2">
+                <button className="ml-auto">
+                  <CiHeart size={25} />
+                </button>
+                <button
+                  className="ml-auto"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigator.clipboard.writeText(gif?.images?.original?.url);
+                    toast.success("Copied to Clipboard");
+                  }}
+                >
+                  <IoIosLink size={25} />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -115,9 +124,8 @@ const GifPage = () => {
           <div className="hidden mt-16 sm:flex flex-col gap-6">
             {/* favorite */}
             <div
-              className="flex gap-3 cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer"
               onClick={() => {
-                e.preventDefault();
                 favorites.includes(gif?.id)
                   ? removeFromFavorites(gif?.id)
                   : addToFavorites(gif?.id);
@@ -131,14 +139,21 @@ const GifPage = () => {
               />
               <p>Favorite</p>
             </div>
-            <div className="flex gap-3">
-              <FaPaperPlane size={20} />
+            <div
+              className="flex items-center gap-3"
+              onClick={(e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(gif?.images?.original?.url);
+                toast.success("Copied to Clipboard");
+              }}
+            >
+              <IoIosLink size={20} />
               <p>Share</p>
             </div>
-            <div className="flex gap-3">
+            {/* <div className="flex gap-3">
               <ImEmbed size={25} />
               <p>Embed</p>
-            </div>
+            </div> */}
           </div>
         </div>
 
