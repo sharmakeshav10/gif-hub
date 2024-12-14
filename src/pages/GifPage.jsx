@@ -10,6 +10,8 @@ import {
 import { CiHeart } from "react-icons/ci";
 import { ImEmbed } from "react-icons/im";
 import { IoIosLink } from "react-icons/io";
+import { FaDownload } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const GifPage = () => {
   const [gif, setGif] = useState([]);
@@ -103,8 +105,19 @@ const GifPage = () => {
                 <div className="text-gray-400">@{gif?.user?.username}</div>
               </div>
               <div className="flex items-center gap-2">
-                <button className="ml-auto">
-                  <CiHeart size={25} />
+                <button
+                  onClick={() => {
+                    favorites.includes(gif?.id)
+                      ? removeFromFavorites(gif?.id)
+                      : addToFavorites(gif?.id);
+                  }}
+                >
+                  <CiHeart
+                    size={25}
+                    className={`${
+                      favorites.includes(gif?.id) ? "text-red-600" : ""
+                    }`}
+                  />
                 </button>
                 <button
                   className="ml-auto"
@@ -140,9 +153,8 @@ const GifPage = () => {
               <p>Favorite</p>
             </div>
             <div
-              className="flex items-center gap-3"
+              className="flex items-center gap-3 cursor-pointer"
               onClick={(e) => {
-                e.preventDefault();
                 navigator.clipboard.writeText(gif?.images?.original?.url);
                 toast.success("Copied to Clipboard");
               }}
